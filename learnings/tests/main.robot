@@ -1,7 +1,7 @@
 *** Settings ***
 *** Settings ***
 Library           SeleniumLibrary
-Library           ../resources/settings.py
+Library           ../learnings/resources/settings.py
 Resource          ../resources/keywords.robot
 
 *** Variables ***

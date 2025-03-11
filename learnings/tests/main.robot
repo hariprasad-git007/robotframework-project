@@ -11,7 +11,7 @@ ${browser}        Chrome
 &{user}    name=Hari    role=Engineer    age=30    # Dictionary with 3 key-value pairs
 @{names}    Hari  priya  Ravi
 &{user1}    name=Hari  role=Engineer
-&{user2}    name=priya  role=Engineer
+&{user2}    name=priya  role=seniorEngineer
 &{user3}    name=Ravi  role=Engineer
 
 *** Test Cases ***
@@ -54,6 +54,6 @@ Test Eight
 Test Nine    #combination of both list and dict
     FOR  ${name}    IN  @{names}
         Log    checking names...
-        Run Keyword If    '${name}' == 'Hari'      Log   ${user1.role}
-        Run Keyword If    '${name}' == 'priya'     Log   ${user2.role}
+        Run Keyword If    '${name}' == 'Hari'      Log To Console   ${user1.role}
+        Run Keyword If    '${name}' == 'priya'     Log To Console   ${user2.role}
     END

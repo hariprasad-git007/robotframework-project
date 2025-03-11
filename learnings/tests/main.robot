@@ -12,8 +12,21 @@ ${browser}        Chrome
 Open Browser And Search In BigBasket
     [Documentation]    Open Chrome browser and navigate to BigBasket, select electronics category, and list products
     Open Browser And Search In BigBasket    ${url}    ${browser}
-    log to console  testing2
+    log to console  bigbasket select is success
 
-*** Test Cases ***
 Test Two
     Log    Becoming a Robot Framework Engineer!
+
+Test Three
+   ${result}=  Evaluate   5+3
+   Should Be Equal As Integers    ${result}    8
+
+Test Four
+    ${text}=  Set Variable  Robotframework
+    Should Contain    ${text}    Robot
+
+Test five
+    ${value}=  Set Variable  10
+    Should Be Equal    ${value}    5
+    
+    

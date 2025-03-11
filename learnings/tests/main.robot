@@ -28,5 +28,9 @@ Test Four
 Test five
     ${value}=  Set Variable  10
     Should Be Equal    ${value}    5
+
+Test six
+    ${Name}=  Set Variable  Hari
+    Log   Hello,${Name}! Keep rocking Robot Framework 
     
     

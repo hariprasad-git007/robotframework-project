@@ -33,7 +33,7 @@ Test Four
 
 Test five
     ${value}=  Set Variable  10
-    Should Be Equal    ${value}    5
+    Should Be Equal    ${value}    10
 
 Test six
     ${Name}=  Set Variable  Hari

@@ -7,6 +7,12 @@ Resource          ../resources/keywords.robot
 *** Variables ***
 ${url}            https://www.bigbasket.com
 ${browser}        Chrome
+@{browsers}       Chrome    Firefox    Edge
+&{user}    name=Hari    role=Engineer    age=30    # Dictionary with 3 key-value pairs
+@{names}    Hari  priya  Ravi
+&{user1}    name=Hari  role=Engineer
+&{user2}    name=priya  role=Engineer
+&{user3}    name=Ravi  role=Engineer
 
 *** Test Cases ***
 Open Browser And Search In BigBasket
@@ -31,6 +37,23 @@ Test five
 
 Test six
     ${Name}=  Set Variable  Hari
-    Log   Hello,${Name}! Keep rocking Robot Framework 
+    Log   Hello,${Name}! Keep rocking Robot Framework
+
+Test seven
+    FOR  ${browsers}  IN    @{browsers}
+        Open Browser    ${url}    ${browsers}
+        Log To Console    Testing bigbasket in ${browsers}
+        Close Browser
+    END
+
+
+Test Eight
+    Log  Hello, ${user.name} you are ${user.age} years old and working as ${user.role}
     
-    
+
+Test Nine    #combination of both list and dict
+    FOR  ${name}    IN  @{names}
+        Log    checking names...
+        Run Keyword If    '${name}' == 'Hari'      Log   ${user1.role}
+        Run Keyword If    '${name}' == 'priya'     Log   ${user2.role}
+    END

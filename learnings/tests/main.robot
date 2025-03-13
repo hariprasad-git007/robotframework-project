@@ -1,6 +1,7 @@
 *** Settings ***
 *** Settings ***
 Library           SeleniumLibrary
+Library    Collections
 #Library           ../learnings/resources/settings.py
 Resource          ../resources/keywords.robot
 
@@ -13,6 +14,10 @@ ${browser}        Chrome
 &{user1}    name=Hari  role=Engineer
 &{user2}    name=priya  role=seniorEngineer
 &{user3}    name=Ravi  role=Engineer
+${cigna}       Dental  SI  coreops
+&{employees}      Dental=36  SI=20  coreops=10
+${shopcate}    //*[@id="headlessui-menu-button-:R5bab6:"]
+
 
 *** Test Cases ***
 Open Browser And Search In BigBasket
@@ -33,7 +38,7 @@ Test Four
 
 Test five
     ${value}=  Set Variable  10
-    Should Be Equal    ${value}    10
+    Should Be Equal    ${value}    5    #Intentionally Failed 
 
 Test six
     ${Name}=  Set Variable  Hari
@@ -56,4 +61,34 @@ Test Nine    #combination of both list and dict
         Log    checking names...
         Run Keyword If    '${name}' == 'Hari'      Log To Console   ${user1.role}
         Run Keyword If    '${name}' == 'priya'     Log To Console   ${user2.role}
+    END
+
+# Test Ten
+#     Open Browser  ${url}  ${browser}
+#     Wait Until Page Contains    category
+#     Maximize Browser Window
+#     Click Element    ${shopcate}
+#     ${options}=    Get WebElements    //*[@id="headlessui-menu-items-:R9bab6:"]//a
+#             FOR  ${option}  IN  @{options}
+#             ${text}=    Get Text    ${option}
+#             Log To Console    category: ${text}
+#             Run Keyword If    '${text}' == 'Home Appliances'    Click Element    ${option}
+#         END
+#         Run Keyword If    '${text}' != 'Home Appliances'    Log To Console    No such category found
+#         Close Browser
+
+Test Ten
+    Open Browser  ${url}  ${browser}
+    Wait Until Page Contains    category
+    Maximize Browser Window
+    Click Element    ${shopcate}
+    ${options}=    Get WebElements    //*[@id="headlessui-menu-items-:R9bab6:"]//a
+    ${count}=   Get Length    ${options}
+    Log To Console    Found ${count} categories
+    FOR    ${index}    IN RANGE    ${count}
+        ${option}=    Get WebElement    xpath=(//*[@id="headlessui-menu-items-:R9bab6:"]//a)[${index + 1}]    # Re-fetch each time
+        ${text}=    Get Text    ${option}
+        Log To Console    category: ${text}
+        Run Keyword If    '${text}' == 'Home Appliances'    Click Element    ${option}
+        Run Keyword If    '${text}' == 'Home Appliances'    Log To Console    Clicked Home Appliances
     END
